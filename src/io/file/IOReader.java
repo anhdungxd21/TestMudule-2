@@ -55,4 +55,14 @@ public final class IOReader {
         }
         return phones;
     }
+    public StringBuilder printListFile(String path){
+        File file = new File(path);
+        StringBuilder stringBuilder = new StringBuilder();
+        if(file.isDirectory()) {
+            for (File file1 : file.listFiles()) {
+                stringBuilder.append(file1.toString().substring(5)+",");
+            }
+        }
+        return stringBuilder;
+    }
 }

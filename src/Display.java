@@ -1,10 +1,12 @@
 import io.file.IOReader;
+import io.file.IOWriter;
 import phonebook.Phone;
 
 import java.util.ArrayList;
 
 public class Display {
     private IOReader ioReader = IOReader.getInstance();
+    private IOWriter ioWriter = IOWriter.getInstance();
     private String path = "data/contacts.csv";
     private ArrayList<Phone> phonebook = ioReader.readfile(path);
     private static volatile Display instance;
@@ -56,6 +58,10 @@ public class Display {
         this.phonebook = phonebook;
     }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public void showList(){
         for (int i = 1; i <phonebook.size(); i++) {
             System.out.println(phonebook.get(i).toString());
@@ -67,5 +73,11 @@ public class Display {
         for (int i = first; i <= last; i++) {
             System.out.println(phonebook.get(i).toString());
         }
+    }
+    public void changeFile(String path){
+        phonebook = ioReader.readfile(path);
+    }
+    public void saveFile(String path){
+        ioWriter.writeObject(phonebook, path);
     }
 }

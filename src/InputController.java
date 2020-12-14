@@ -140,6 +140,16 @@ public class InputController {
         }
         bigMenuControl();
     }
+    public void changeFile(){
+        //printListFile();
+        bigMenuControl();
+    }
+    public void saveFile(){
+        System.out.print("Nhập đường dẫn file: ");
+        String path = scanner.nextLine();
+        display.saveFile("data/" + path);
+        bigMenuControl();
+    }
 
     public void bigMenuControl(){
         display.bigMenu();
@@ -162,8 +172,11 @@ public class InputController {
                 searhNumeber();
                 break;
             case "6":
+                changeFile();
                 break;
             case "7":
+                //save file
+                saveFile();
                 break;
             case "8":
                 System.exit(0);
