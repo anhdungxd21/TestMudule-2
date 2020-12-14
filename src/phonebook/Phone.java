@@ -79,12 +79,12 @@ public class Phone {
 
     @Override
     public String toString(){
-        return this.phoneNumber + COMMA
-                + this.group + COMMA
-                + this.name + COMMA
-                + this.gender + COMMA
-                + this.address + COMMA
-                + this.birthday + COMMA
-                + this.email;
+        return phoneNumber + COMMA
+                + group + COMMA
+                + name + COMMA
+                + gender + COMMA
+                + address + COMMA
+                + birthday + COMMA
+                + email;
     }
 }

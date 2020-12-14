@@ -76,7 +76,7 @@ public class InputController {
             }
         }
         if(index > 0){
-            phones.get(index).toString();
+            System.out.println(phones.get(index).toString());
             String number = checkInput("0[0-9]{9}","Nhập số điện thoại: ");
             String group = checkInput("[a-zA-Z0-9 ]{1,}","Nhập nhóm: ");
             String name = checkInput("[a-zA-Z0-9 ]{1,}","Nhập tên: ");
@@ -97,6 +97,33 @@ public class InputController {
         }
         bigMenuControl();
     }
+    public void deleteNumber(){
+        System.out.print("Nhập số điện thoại cần xóa: ");
+        String phoneNumber = scanner.nextLine();
+        ArrayList<Phone> phones = Display.getInstance().getPhonebook();
+        int index = -1;
+        for (int i = 0; i < phones.size(); i++) {
+            if(phoneNumber.equals(phones.get(i).getPhoneNumber())){
+                index = i;
+            }
+        }
+    }
+    public void searhNumeber(){
+        System.out.print("Nhập số điện thoại cần xóa: ");
+        String phoneNumber = scanner.nextLine();
+        ArrayList<Phone> phones = Display.getInstance().getPhonebook();
+        int index = -1;
+        for (int i = 0; i < phones.size(); i++) {
+            if(phoneNumber.equals(phones.get(i).getPhoneNumber())){
+                index = i;
+            }
+        }
+        if(index > 0){
+            System.out.println(phones.get(index).toString());
+        }else{
+            System.out.println("Số điện thoại không tồn tại.");
+        }
+    }
 
     public void bigMenuControl(){
         display.bigMenu();
@@ -113,8 +140,10 @@ public class InputController {
                 update();
                 break;
             case "4":
+                deleteNumber();
                 break;
             case "5":
+                searhNumeber();
                 break;
             case "6":
                 break;
