@@ -1,5 +1,6 @@
 import phonebook.Phone;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,10 +59,43 @@ public class InputController {
         String address = checkInput("[a-zA-Z0-9 ]{1,}","Nhập Địa chỉ: ");
         String dateRegex = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
         String birthday = checkInput(dateRegex,"Nhập ngày sinh: ");
-        String email = checkInput("^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$","Nhập email");
-        display.getPhonebook().add(new Phone(number,group,name,gender,address,birthday,email));
+        String email = checkInput("^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$","Nhập email: ");
+        display.addToList(number,group,name,gender,address,birthday,email);
         bigMenuControl();
 
+    }
+
+    public void update(){
+        System.out.print("Nhập số điện thoại cần sửa: ");
+        String phoneNumber = scanner.nextLine();
+        ArrayList<Phone> phones = Display.getInstance().getPhonebook();
+        int index = -1;
+        for (int i = 0; i < phones.size(); i++) {
+            if(phoneNumber.equals(phones.get(i).getPhoneNumber())){
+                index = i;
+            }
+        }
+        if(index > 0){
+            phones.get(index).toString();
+            String number = checkInput("0[0-9]{9}","Nhập số điện thoại: ");
+            String group = checkInput("[a-zA-Z0-9 ]{1,}","Nhập nhóm: ");
+            String name = checkInput("[a-zA-Z0-9 ]{1,}","Nhập tên: ");
+            String gender = checkInput("([nN][aA][mM])|([nN][uU])","Nhập giới tính: ");
+            String address = checkInput("[a-zA-Z0-9 ]{1,}","Nhập Địa chỉ: ");
+            String dateRegex = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
+            String birthday = checkInput(dateRegex,"Nhập ngày sinh: ");
+            String email = checkInput("^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$","Nhập email: ");
+            phones.get(index).setPhoneNumber(number);
+            phones.get(index).setGroup(group);
+            phones.get(index).setName(name);
+            phones.get(index).setGender(gender);
+            phones.get(index).setAddress(address);
+            phones.get(index).setBirthday(birthday);
+            phones.get(index).setEmail(email);
+        }else{
+            System.out.println("Số điện thoại không tồn tại.");
+        }
+        bigMenuControl();
     }
 
     public void bigMenuControl(){
@@ -76,6 +110,7 @@ public class InputController {
                 addPhone();
                 break;
             case "3":
+                update();
                 break;
             case "4":
                 break;

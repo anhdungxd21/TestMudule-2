@@ -5,9 +5,10 @@ import java.util.ArrayList;
 
 public class Display {
     private IOReader ioReader = IOReader.getInstance();
-    private ArrayList<Phone> phonebook = null;
-    private static volatile Display instance;
     private String path = "data/contacts.csv";
+    private ArrayList<Phone> phonebook = ioReader.readfile(path);
+    private static volatile Display instance;
+
 
     private Display(){
         phonebook = ioReader.readfile(path);
@@ -45,6 +46,9 @@ public class Display {
     public int getArraySize(){
         return phonebook.size();
     }
+    public void addToList(String number,String group,String name, String gender, String address,String birthday,String email){
+        phonebook.add(new Phone(number,group,name,gender,address,birthday,email));
+    }
     public ArrayList<Phone> getPhonebook(){
         return phonebook;
     }
@@ -53,8 +57,6 @@ public class Display {
     }
 
     public void showList(){
-        IOReader ioReader = IOReader.getInstance();
-        setPhonebook(ioReader.readfile(path));
         for (int i = 1; i <phonebook.size(); i++) {
             System.out.println(phonebook.get(i).toString());
         }
