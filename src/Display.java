@@ -74,7 +74,13 @@ public class Display {
             System.out.println(phonebook.get(i).toString());
         }
     }
+
+    public void printFileList(){
+        StringBuilder stringBuilder =  ioReader.printListFile("data");
+        System.out.println(stringBuilder.toString());
+    }
     public void changeFile(String path){
+
         phonebook = ioReader.readfile(path);
     }
     public void saveFile(String path){

@@ -141,7 +141,10 @@ public class InputController {
         bigMenuControl();
     }
     public void changeFile(){
-        //printListFile();
+        display.printFileList();
+        System.out.println("Nhập đường dẫn file:");
+        String path = scanner.nextLine();
+        display.changeFile(path);
         bigMenuControl();
     }
     public void saveFile(){
