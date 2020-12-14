@@ -107,6 +107,21 @@ public class InputController {
                 index = i;
             }
         }
+        if(index > 0){
+            System.out.println(phones.get(index).toString());
+            System.out.println("Bạn có muốn xóa không?");
+            System.out.println("1. Có");
+            System.out.println("2. chọn bất kỳ để hủy");
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1":
+                    phones.remove(index);
+                    break;
+                default:
+                    bigMenuControl();
+            }
+        }
+        bigMenuControl();
     }
     public void searhNumeber(){
         System.out.print("Nhập số điện thoại cần xóa: ");
@@ -123,6 +138,7 @@ public class InputController {
         }else{
             System.out.println("Số điện thoại không tồn tại.");
         }
+        bigMenuControl();
     }
 
     public void bigMenuControl(){
